@@ -34,4 +34,32 @@ describe Chat::Message do
       end
     end
   end
+
+  context "textual" do
+    let(:message) { Chat::Message.new { :type => :text, :user => Chat::User.new(2, "Dummy", "dummy@example.com", 1, "ff0000", true), :text => "Hello there" } }
+
+    describe "#new" do
+      it "returns a Message object" do
+        message.should be_an_instance_of Chat::Message
+      end
+    end
+
+    describe "#type" do
+      it "returns the type of the message" do
+        message.type.should eql :text
+      end
+    end
+
+    describe "#text" do
+      it "returns the text of the message" do
+        message.text.should eql "Hi there"
+      end
+    end
+
+    describe "#public?" do
+      it "returns whether the message is to be broadcast or sent to one client" do
+        message.public?.should be_true
+      end
+    end
+  end
 end

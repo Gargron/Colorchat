@@ -3,6 +3,7 @@ require_relative '../chat/message'
 
 require 'yaml'
 require 'mocha'
+require 'redis'
 require 'mock_redis'
 require 'json'
 require 'digest/md5'
