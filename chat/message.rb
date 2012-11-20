@@ -27,5 +27,14 @@ module Chat
     def public?
       [:system, :text].include? @type
     end
+
+    # Public: Convert to a JSON object
+    #
+    # Returns the JSON string
+    def to_json
+      hash = {}
+      self.instance_variables.each {|var| hash[var.to_s.delete "@"] = self.instance_variable_get var }
+      hash.to_json
+    end
   end
 end

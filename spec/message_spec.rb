@@ -52,7 +52,7 @@ describe Chat::Message do
 
     describe "#text" do
       it "returns the text of the message" do
-        message.text.should eql "Hi there"
+        message.text.should eql "Hello there"
       end
     end
 
