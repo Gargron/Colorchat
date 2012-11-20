@@ -28,13 +28,22 @@ module Chat
       [:system, :text].include? @type
     end
 
-    # Public: Convert to a JSON object
+    # Public: Transforms the instance of Message into a hash object
+    #
+    # Returns a hash
+    def to_hash
+      {
+        :type => @type,
+        :text => @text,
+        :user => @user.nil? nil : ? @user.to_hash
+      }
+    end
+
+    # Public: Converts message to a JSON object
     #
     # Returns the JSON string
     def to_json
-      hash = {}
-      self.instance_variables.each {|var| hash[var.to_s.delete "@"] = self.instance_variable_get var }
-      hash.to_json
+      to_hash.to_json
     end
   end
 end

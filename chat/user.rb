@@ -74,13 +74,23 @@ module Chat
       !(muted || banned)
     end
 
+    # Public: Transforms the instance of User into a simple hash object
+    #
+    # Returns a hash
+    def to_hash
+      {
+        :id   => @id,
+        :name => @name,
+        :hash => @hash,
+        :role => @role
+      }
+    end
+
     # Public: Transforms the instance of User into a JSON object
     #
     # Returns a JSON string
     def to_json
-      hash = {}
-      self.instance_variables.each {|var| hash[var.to_s.delete "@"] = self.instance_variable_get var }
-      hash.to_json
+      to_hash.to_json
     end
 
     private
