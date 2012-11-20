@@ -80,10 +80,13 @@ module Chat
     # Returns a hash
     def to_hash
       {
-        :id   => @id,
-        :name => @name,
-        :hash => @hash,
-        :role => @role
+        :id    => @id,
+        :name  => @name,
+        :email => @email,
+        :hash  => @hash,
+        :role  => @role,
+        :color => @color,
+        :nsfw  => @nsfw
       }
     end
 

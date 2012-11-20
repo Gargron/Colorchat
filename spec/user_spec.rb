@@ -111,7 +111,7 @@ describe Chat::User do
 
     describe "#to_json" do
       it "converts the user to a JSON string" do
-        user.to_json.should eql "{\"id\":2,\"name\":\"Dummy\",\"hash\":\"6e8e0bf6135471802a63a17c5e74ddc5\",\"role\":1}"
+        user.to_json.should eql "{\"id\":2,\"name\":\"Dummy\",\"email\":\"dummy@example.com\",\"hash\":\"6e8e0bf6135471802a63a17c5e74ddc5\",\"role\":1,\"color\":\"ff0000\",\"nsfw\":true}"
       end
     end
   end
