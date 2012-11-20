@@ -35,7 +35,7 @@ module Chat
       {
         :type => @type,
         :text => @text,
-        :user => @user.nil? nil : ? @user.to_hash
+        :user => @user.nil? ? nil : @user.to_hash
       }
     end
 
