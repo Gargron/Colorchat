@@ -2,7 +2,7 @@ require_relative '../chat/user'
 require_relative '../chat/message'
 
 require 'yaml'
-require 'mocha'
+require 'mocha/api'
 require 'redis'
 require 'mock_redis'
 require 'json'
