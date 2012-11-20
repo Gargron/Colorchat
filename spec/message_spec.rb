@@ -58,7 +58,7 @@ describe Chat::Message do
 
     describe "#to_json" do
       it "converts the message and the user to a JSON string" do
-        message.to_json.should eql "{\"type\":\"text\",\"text\":\"Hello there\",\"user\":{\"id\":2,\"name\":Dummy,\"email\":\"dummy@example.com\",\"hash\":\"6e8e0bf6135471802a63a17c5e74ddc5\",\"role\":1,\"color\":\"ff0000\",\"nsfw\":true}}"
+        message.to_json.should eql "{\"type\":\"text\",\"text\":\"Hello there\",\"user\":{\"id\":2,\"name\":\"Dummy\",\"email\":\"dummy@example.com\",\"hash\":\"6e8e0bf6135471802a63a17c5e74ddc5\",\"role\":1,\"color\":\"ff0000\",\"nsfw\":true}}"
       end
     end
 
