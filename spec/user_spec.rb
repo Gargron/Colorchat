@@ -108,6 +108,12 @@ describe Chat::User do
         user.hash.should eql "6e8e0bf6135471802a63a17c5e74ddc5"
       end
     end
+
+    describe "#to_json" do
+      it "converts the user to a JSON string" do
+        user.to_json.should eql "{\"id\":2,\"name\":Dummy,\"email\":\"dummy@example.com\",\"hash\":\"6e8e0bf6135471802a63a17c5e74ddc5\",\"role\":1,\"color\":\"ff0000\",\"nsfw\":true}"
+      end
+    end
   end
 
   describe "#can_talk" do
