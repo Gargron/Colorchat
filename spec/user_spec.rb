@@ -121,6 +121,10 @@ describe Chat::User do
       it "doesn't let the user talk when muted" do
         user.can_talk?.should be_false
       end
+
+      after do
+        user.unmute!
+      end
     end
 
     context "user is not muted" do
@@ -136,6 +140,10 @@ describe Chat::User do
 
       it "doesn't let the user talk when banned" do
         user.can_talk?.should be_false
+      end
+
+      after do 
+        @redis.del "ban:2"
       end
     end
   end

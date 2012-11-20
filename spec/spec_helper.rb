@@ -13,8 +13,4 @@ RSpec.configure do |config|
     @redis = MockRedis.new
     Redis.stubs(:new).returns(@redis)
   end
-
-  config.before :each do
-    @redis.flushdb
-  end
 end
