@@ -47,6 +47,7 @@ module Chat
     # Returns an instance of User
     def self.from_datastore(identifier)
       user_hash = JSON.parse(redis("get", "user:session:#{identifier}"))
+      raise "Given user is empty" if user_hash.nil?
       self.new user_hash['id'], user_hash['name'], user_hash['email'], user_hash['role'], user_hash['color'], user_hash['nsfw']
     end
 
