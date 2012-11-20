@@ -1,4 +1,4 @@
 module Chat
-	class Message
-	end
+  class Message
+  end
 end
