@@ -51,11 +51,7 @@ module Chat
     # Returns the boolean value, caches the result
     def executable?
       return @executable if !@executable.nil?
-
-      starts_with_slash = @text.start_with? "/"
-      known_command     = Command.respond_to? command
-
-      @executable = starts_with_slash && known_command
+      @executable = @text.start_with?("/") && Command.respond_to?(command)
       @executable
     end
 
