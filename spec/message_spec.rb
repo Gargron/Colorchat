@@ -68,4 +68,36 @@ describe Chat::Message do
       end
     end
   end
+
+  context "with a command" do
+    let(:message) { Chat::Message.new({ :type => :text, :user => Chat::User.new(2, "Dummy", "dummy@example.com", 1, "ff0000", true), :text => "/ping" }) }
+
+    describe "#executable?" do
+      it "says if the message contains a command" do
+        message.executable?.should be_true
+      end
+    end
+
+    describe "#execute" do
+      before do
+        message.execute!
+      end
+
+      it "tranforms the message into a command response" do
+        message.type.should eql :response
+      end
+
+      it "removes the user from the message" do
+        message.user.should be_nil
+      end
+
+      it "says that the message be sent back to one client" do
+        message.public?.should be_false
+      end
+
+      it "places response value into the message text" do
+        message.text.should eql "pong"
+      end
+    end
+  end
 end
