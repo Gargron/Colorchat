@@ -68,7 +68,7 @@ module Chat
 
       @user = nil
       @type = :response
-      @text = Command::send command, *(self >> arguments)
+      @text = Command::send command, *(arguments.unshift self)
     end
 
     private
