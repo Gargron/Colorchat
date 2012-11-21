@@ -9,9 +9,6 @@ module Chat
     # Public: Returns owner of message
     attr_reader :user
 
-    # Public: Known commands that can be invoked from the text
-    KNOWN_METHODS = ["ping"]
-
     # Public: Initializes a new message instance
     #
     # options - Hash options used to instantiate the message polymorphically
@@ -56,7 +53,7 @@ module Chat
       return @executable if !@executable.nil?
 
       starts_with_slash = @text.start_with? "/"
-      known_command     = KNOWN_METHODS.include? command
+      known_command     = Command.respond_to? command
 
       @executable = starts_with_slash && known_command
       @executable
@@ -71,7 +68,7 @@ module Chat
 
       @user = nil
       @type = :response
-      @text = Command::send command, *arguments
+      @text = Command::send command, *(self >> arguments)
     end
 
     private
@@ -87,8 +84,7 @@ module Chat
     #
     # Returns the array of arguments
     def arguments
-      args = @text.split(" ").shift
-      return args unless args.empty?
+      @text.split(" ").shift
     end
   end
 end
