@@ -61,5 +61,17 @@ module Chat
       @executable = starts_with_slash && known_command
       @executable
     end
+
+    # Public: Execute the command of the message, convert current message into
+    # a response to the sender with the result of the command
+    #
+    # Returns nothing
+    def execute!
+      raise 'Message not executable' if !executable?
+
+      @user = nil
+      @type = :response
+      @text = ""
+    end
   end
 end
