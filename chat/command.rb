@@ -1,6 +1,6 @@
 module Chat
   module Command
-    def ping
+    def self.ping
       "pong"
     end
   end
