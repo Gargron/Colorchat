@@ -16,7 +16,7 @@ module Protocols
       #
       # Returns nothing
       def onopen
-        @user = User.new 0, "Guest", "guest@example.com", 1, "000000", false
+        @user = Chat::User.new 0, "Guest", "guest@example.com", 1, "000000", false
       end
 
       # Public: Event triggered when the connection is closed
@@ -31,7 +31,7 @@ module Protocols
       #
       # Returns nothing
       def onmessage(data)
-        message = Message.new({ :type => :text, :text => data, :user => @user })
+        message = Chat::Message.new({ :type => :text, :text => data, :user => @user })
         message.execute! if message.executable?
         @socket.send message.to_json unless message.public?
       end
