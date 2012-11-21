@@ -7,9 +7,6 @@ module Protocols
       # Public: Connection user
       attr_reader :user
 
-      # Publci: Connection room
-      attr_reader :room
-
       # Public: Initialize the connection instance
       def initialize(socket)
         @socket = socket
@@ -19,6 +16,7 @@ module Protocols
       #
       # Returns nothing
       def onopen
+        @user = User.new 0, "Guest", "guest@example.com", 1, "000000", false
       end
 
       # Public: Event triggered when the connection is closed
@@ -33,6 +31,9 @@ module Protocols
       #
       # Returns nothing
       def onmessage(data)
+        message = Message.new { :type => :text, :text => data, :user => @user }
+        message.execute! if message.executable?
+        @socket.send message.to_json unless message.public?
       end
     end
   end
