@@ -5,12 +5,12 @@ module Chat
     end
 
     def self.mute(message, name, duration, *args)
-      "Insufficient rights" if message.user.role < 2
+      return "Insufficient rights" if message.user.role < 2
       "OK muting"
     end
 
     def self.unmute(message, name)
-      "Insufficient rights" if message.user.role < 2
+      return "Insufficient rights" if message.user.role < 2
       "OK unmuting"
     end
   end
