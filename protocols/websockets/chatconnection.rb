@@ -7,9 +7,17 @@ module Protocols
       # Public: Connection user
       attr_reader :user
 
+      # Public: Connection room
+      attr_reader :room
+
+      # Public: ID of the room subscription
+      attr_reader :subscription_id
+
       # Public: Initialize the connection instance
-      def initialize(socket)
+      def initialize(socket, room)
         @socket = socket
+        @room   = room
+        @subscription_id = @room.subscribe { |data| @socket.send data.encode "UTF-8" }
       end
 
       # Public: Event triggered when the connection is opened
@@ -23,6 +31,7 @@ module Protocols
       #
       # Returns nothing
       def onclose
+        @room.unsubscribe @subscription_id
       end
 
       # Public: Event triggered when data is transmitted through the connection
@@ -31,9 +40,9 @@ module Protocols
       #
       # Returns nothing
       def onmessage(data)
-        message = Chat::Message.new({ :type => :text, :text => data, :user => @user })
+        message = Chat::Message.new({ :type => :text, :text => data.encode("UTF-8"), :user => @user })
         message.execute! if message.executable?
-        @socket.send message.to_json unless message.public?
+        @socket.send message.to_json unless message.public? else @room.push message.to_json
       end
     end
   end
