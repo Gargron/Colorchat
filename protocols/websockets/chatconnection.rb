@@ -31,7 +31,7 @@ module Protocols
       #
       # Returns nothing
       def onmessage(data)
-        message = Message.new { :type => :text, :text => data, :user => @user }
+        message = Message.new({ :type => :text, :text => data, :user => @user })
         message.execute! if message.executable?
         @socket.send message.to_json unless message.public?
       end
