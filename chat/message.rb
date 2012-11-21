@@ -62,14 +62,14 @@ module Chat
     def execute!
       raise 'Message not executable' if !executable?
 
-      @user = nil
-      @type = :response
-
       begin
         @text = Command::send(command, *(arguments.unshift self))
       rescue ArgumentError => exc
         @text = "Argument error"
       end
+
+      @type = :response
+      @user = nil
     end
 
     private
