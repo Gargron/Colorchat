@@ -84,7 +84,7 @@ module Chat
     #
     # Returns the array of arguments
     def arguments
-      args @text.split(" ")
+      args = @text.split(" ")
       args.shift
       args
     end
