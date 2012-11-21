@@ -64,7 +64,7 @@ module Chat
 
       @user = nil
       @type = :response
-      @text = Command::send(command, *(arguments.unshift self)) rescue ArgumentError "Argument error"
+      @text = Command::send(command, *(arguments.unshift self)) rescue ArgumentError { "Argument error" }
     end
 
     private
