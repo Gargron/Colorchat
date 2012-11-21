@@ -42,7 +42,12 @@ module Protocols
       def onmessage(data)
         message = Chat::Message.new({ :type => :text, :text => data.encode("UTF-8"), :user => @user })
         message.execute! if message.executable?
-        if message.public? then @room.push(message.to_json) else @socket.send(message.to_json)
+
+        if message.public?
+          @room.push(message.to_json)
+        else
+          @socket.send(message.to_json)
+        end
       end
     end
   end
