@@ -9,6 +9,9 @@ module Chat
     # Public: Returns owner of message
     attr_reader :user
 
+    # Public: Known commands that can be invoked from the text
+    KNOWN_METHODS = ["/ping"]
+
     # Public: Initializes a new message instance
     #
     # options - Hash options used to instantiate the message polymorphically
@@ -44,6 +47,19 @@ module Chat
     # Returns the JSON string
     def to_json
       to_hash.to_json
+    end
+
+    # Public: Is message a command to be executed?
+    #
+    # Returns the boolean value, caches the result
+    def executable?
+      return @executable if !@executable.nil?
+
+      starts_with_slash = @text.start_with? "/"
+      known_command     = KNOWN_METHODS.include? @text.split(" ").first
+
+      @executable = starts_with_slash && known_command
+      @executable
     end
   end
 end
