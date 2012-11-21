@@ -5,11 +5,11 @@ require 'digest/md5'
 require 'eventmachine'
 require 'em-websocket'
 
-require 'chat/user'
-require 'chat/command'
-require 'chat/message'
+require_relative './chat/user'
+require_relative './chat/command'
+require_relative './chat/message'
 
-require 'protocols/websockets/chatconnection'
+require_relative './protocols/websockets/chatconnection'
 
 EventMachine.run do
   EventMachine::WebSocket.start(:host => '127.0.0.1', :port => 8050) do |socket|
