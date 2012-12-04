@@ -16,7 +16,7 @@ module Protocols
       # Public: Initialize the connection instance
       def initialize(socket, chat)
         @socket = socket
-        @room   = chat.room
+        @room   = chat.root_room
         @subscription_id = @room.subscribe { |data| @socket.send data.encode "UTF-8" }
       end
 
