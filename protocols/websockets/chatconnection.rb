@@ -14,9 +14,9 @@ module Protocols
       attr_reader :subscription_id
 
       # Public: Initialize the connection instance
-      def initialize(socket, room)
+      def initialize(socket, chat)
         @socket = socket
-        @room   = room
+        @room   = chat.room
         @subscription_id = @room.subscribe { |data| @socket.send data.encode "UTF-8" }
       end
 
