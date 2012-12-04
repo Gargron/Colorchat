@@ -10,12 +10,16 @@ module Protocols
       # Public: Connection room
       attr_reader :room
 
+      # Public: Access to the main chat object
+      attr_reader :chat
+
       # Public: ID of the room subscription
       attr_reader :subscription_id
 
       # Public: Initialize the connection instance
       def initialize(socket, chat)
         @socket = socket
+        @chat   = chat
         @room   = chat.root_room
         @subscription_id = @room.subscribe { |data| @socket.send data.encode "UTF-8" }
       end
@@ -48,6 +52,19 @@ module Protocols
         else
           @socket.send(message.to_json)
         end
+      end
+
+      private
+
+      # Internal: Switch subscription of the connection to a different room
+      #
+      # identifier - String, what room to switch to
+      #
+      # Returns nothing
+      def change_room(identifier)
+        @room.unsubscribe @subscription_id
+        @room            = @chat.get_room(identifier)
+        @subscription_id = @room.subscribe { |data| @socket.send data.encode "UTF-8" }
       end
     end
   end

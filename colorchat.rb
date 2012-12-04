@@ -19,6 +19,15 @@ class ColorChat
   def initialize
     @root_room = EventMachine::Channel.new
   end
+
+  # Public: Retrieve a reference to a room
+  #
+  # identifier - String, what room shall we get
+  #
+  # Returns Chat::Room
+  def get_room(identifier)
+    # TODO
+  end
 end
 
 EventMachine.run do
