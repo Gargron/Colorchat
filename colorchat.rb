@@ -5,12 +5,8 @@ require 'digest/md5'
 require 'eventmachine'
 require 'em-websocket'
 
-require_relative './chat/user'
-require_relative './chat/command'
-require_relative './chat/message'
-require_relative './chat/room'
-
-require_relative './protocols/websockets/chatconnection'
+Dir["chat/*.rb"].each      { |file| require file }
+Dir["protocols/*.rb"].each { |file| require file }
 
 class ColorChat
   # Public: The main room
@@ -19,15 +15,6 @@ class ColorChat
   # Public: Initialize a new chat
   def initialize
     @root_room = Chat::Room.new("")
-  end
-
-  # Public: Retrieve a reference to a room
-  #
-  # identifier - String, what room shall we get
-  #
-  # Returns Chat::Room
-  def get_room(identifier)
-    # TODO
   end
 end
 

@@ -58,12 +58,12 @@ module Protocols
 
       # Internal: Switch subscription of the connection to a different room
       #
-      # identifier - String, what room to switch to
+      # path - String, what room to switch to
       #
       # Returns nothing
-      def change_room(identifier)
+      def change_room(path)
         @room.unsubscribe @subscription_id
-        @room            = @chat.get_room(identifier)
+        @room            = @chat.room.get(path)
         @subscription_id = @room.subscribe { |data| @socket.send data.encode "UTF-8" }
       end
     end
