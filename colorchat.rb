@@ -8,6 +8,7 @@ require 'em-websocket'
 require_relative './chat/user'
 require_relative './chat/command'
 require_relative './chat/message'
+require_relative './chat/room'
 
 require_relative './protocols/websockets/chatconnection'
 
@@ -17,7 +18,7 @@ class ColorChat
 
   # Public: Initialize a new chat
   def initialize
-    @root_room = EventMachine::Channel.new
+    @root_room = Chat::Room.new("")
   end
 
   # Public: Retrieve a reference to a room
