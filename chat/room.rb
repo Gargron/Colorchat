@@ -17,7 +17,7 @@ module Chat
       @identifier = identifier
       @parent     = parent
       @children   = Hash.new
-      super
+      super()
     end
 
     # Public: Create a nested room
