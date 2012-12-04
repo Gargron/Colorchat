@@ -5,8 +5,8 @@ require 'digest/md5'
 require 'eventmachine'
 require 'em-websocket'
 
-Dir["chat/*.rb"].each      { |file| require file }
-Dir["protocols/*.rb"].each { |file| require file }
+Dir["#{File.dirname(__FILE__)}/chat/*.rb"].each      { |file| require file }
+Dir["#{File.dirname(__FILE__)}/protocols/*.rb"].each { |file| require file }
 
 class ColorChat
   # Public: The main room
