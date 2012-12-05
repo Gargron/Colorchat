@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Chat::Room do
-  let(:room) { Chat::Room.new }
+  let(:room) { Chat::Room.new "" }
 
   describe "#initialize" do
     it "initializes empty new room" do
