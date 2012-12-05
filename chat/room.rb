@@ -20,13 +20,22 @@ module Chat
       super()
     end
 
+    # Public: Change parent
+    #
+    # parent - parent room
+    #
+    # Returns nothing
+    def attribute_to(parent)
+      @parent = parent
+    end
+
     # Public: Create a nested room
     #
     # room
     #
     # Returns nothing
     def append(room)
-      @children[room.identifier] = room
+      @children[room.identifier] = room && room.attribute_to(self)
     end
 
     # Public: Resolve a room from a path
