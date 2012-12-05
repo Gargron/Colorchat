@@ -51,6 +51,24 @@ module Chat
       self.new user_hash['id'], user_hash['name'], user_hash['email'], user_hash['role'], user_hash['color'], user_hash['nsfw']
     end
 
+    # Public: Update current instance by loading data from a datastore
+    #
+    # identifier - key for datastore look-up
+    #
+    # Returns nothing
+    def load(identifier)
+      user_hash = JSON.parse(redis("get", "user:session:#{identifier}"))
+      raise "Given user is empty" if user_hash.nil?
+
+      @id    = user_hash['id']
+      @name  = user_hash['name']
+      @email = user_hash['email']
+      @hash  = Digest::MD5.hexdigest(user_hash['email'])
+      @role  = user_hash['role']
+      @color = user_hash['color']
+      @nsfw  = user_hash['nsfw']
+    end
+
     # Public: Mute the user
     #
     # Returns nothing
