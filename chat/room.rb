@@ -44,5 +44,18 @@ module Chat
 
       room
     end
+
+    # Public: Broadcast data to this room and all its nested rooms
+    #
+    # data - Something to broadcast
+    #
+    # Returns nothing
+    def shout(data)
+      push data
+
+      @children.each do |room|
+        room.shout data
+      end
+    end
   end
 end
