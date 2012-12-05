@@ -8,6 +8,7 @@ require 'mocha/setup'
 require 'redis'
 require 'mock_redis'
 require 'json'
+require 'eventmachine'
 require 'digest/md5'
 
 RSpec.configure do |config|
