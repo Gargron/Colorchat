@@ -1,5 +1,5 @@
 module Chat
-  class Room < EventMachine::Channel
+  class Room < ::EventMachine::Channel
     # Public: Name of the room
     attr_reader :identifier
 
