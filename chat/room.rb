@@ -35,7 +35,8 @@ module Chat
     #
     # Returns nothing
     def append(room)
-      @children[room.identifier] = room && room.attribute_to(self)
+      @children[room.identifier] = room
+      room.attribute_to(self)
     end
 
     # Public: Resolve a room from a path
