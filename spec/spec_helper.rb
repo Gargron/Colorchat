@@ -1,5 +1,5 @@
 require 'yaml'
-require 'mocha/setup'
+require 'mocha/api'
 require 'redis'
 require 'mock_redis'
 require 'json'
