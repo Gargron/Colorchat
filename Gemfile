@@ -5,6 +5,8 @@ gem "json"
 gem "eventmachine"
 gem "em-websocket"
 
-gem "rspec"
-gem "mocha"
-gem "mock_redis"
+group :test do
+  gem "rspec"
+  gem "mocha"
+  gem "mock_redis"
+end
