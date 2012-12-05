@@ -23,9 +23,11 @@ describe Chat::Room do
 
   context "child rooms" do
     let(:child_room) { Chat::Room.new("test", room) }
+    let(:even_childer_room) { Chat::Room.new("whoop", child_room) }
 
     before do
-      room.append child_room 
+      room.append child_room
+      child_room.append even_childer_room
     end
 
     describe "#append" do
@@ -35,8 +37,12 @@ describe Chat::Room do
     end
 
     describe "#get" do
-      it "can resolve to the child room" do
+      it "resolves to the child room" do
         room.get("test").should eql child_room
+      end
+
+      it "resolves to the nested nested room" do
+        room.get("test.whoop").should eql even_childer_room
       end
     end
   end
