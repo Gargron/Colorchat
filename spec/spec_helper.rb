@@ -1,6 +1,7 @@
 require_relative '../chat/user'
 require_relative '../chat/command'
 require_relative '../chat/message'
+require_relative '../chat/room'
 
 require 'yaml'
 require 'mocha/setup'
