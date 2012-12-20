@@ -23,6 +23,7 @@ module Chat
       @type = options[:type]
       @text = options[:text]
       @user = options[:user]
+      @chat = chat
     end
 
     # Public: Is the message for broadcast or for one client?
