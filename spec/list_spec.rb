@@ -5,6 +5,8 @@ describe Chat::List do
 
   let(:user) { Chat::User.new 2, "Dummy", "dummy@example.com", 1, "ff0000", true }
 
+  let(:socket) { Hash.new }
+
   describe "#initialize" do
     it "creates new instance of List" do
       list.should be_instance_of Chat::List
@@ -17,7 +19,7 @@ describe Chat::List do
 
   context "users and sockets" do
     before :all do
-      list.add(user, {})
+      list.add(user, socket)
     end
 
     describe "#add" do
@@ -41,7 +43,13 @@ describe Chat::List do
     end
 
     describe "#remove" do
+      before do
+        list.remove(user.id, socket)
+      end
 
+      it "removes the user entry completely" do
+        list.find(2).should be_nil
+      end
     end
   end
 end

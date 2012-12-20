@@ -33,6 +33,17 @@ module Chat
     #
     # Returns nothing
     def remove(id, socket)
+      found = find(user.id)
+
+      if found.nil?
+        return
+      else
+        @users[found[:index]][:sockets].delete socket
+        
+        if @users[found[:index]][:sockets].empty?
+          @users.delete_at found[:index]
+        end
+      end
     end
 
     # Public: Find a user and their sockets
