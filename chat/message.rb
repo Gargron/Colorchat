@@ -9,13 +9,17 @@ module Chat
     # Public: Returns owner of message
     attr_reader :user
 
+    # Public: Returns chat
+    attr_reader :chat
+
     # Public: Initializes a new message instance
     #
+    # chat    - Chat from which the message is invoked
     # options - Hash options used to instantiate the message polymorphically
     #           :type - Type of the message
     #           :user - Owner of the message (optional)
     #           :text - The contents of the message
-    def initialize(options)
+    def initialize(chat, options)
       @type = options[:type]
       @text = options[:text]
       @user = options[:user]

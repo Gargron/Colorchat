@@ -49,7 +49,7 @@ module Protocols
       #
       # Returns nothing
       def onmessage(data)
-        message = Chat::Message.new({ :type => :text, :text => data.encode("UTF-8"), :user => @user })
+        message = Chat::Message.new(@chat, { :type => :text, :text => data.encode("UTF-8"), :user => @user })
         message.execute! if message.executable?
 
         if message.public?

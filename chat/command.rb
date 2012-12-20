@@ -22,5 +22,9 @@ module Chat
       return "Insufficient rights" if message.user.role < 2
       "OK unmuting"
     end
+
+    def self.list(message, *args)
+      message.chat.list.inspect
+    end
   end
 end
