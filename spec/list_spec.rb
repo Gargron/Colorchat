@@ -11,7 +11,7 @@ describe Chat::List do
     end
 
     it "creates an empty users array" do
-      list.users.should be_intance_of Array
+      list.users.should be_empty
     end
   end
 
@@ -28,15 +28,15 @@ describe Chat::List do
 
     describe "#find" do
       it "retrieves the user inside a hash" do
-        list.find(2).should be_instance_of Hash
+        list.find(2).should have_key :user
       end
 
       it "retrieves the user correctly" do
         list.find(2)[:user].should eql user
       end
 
-      it "retrieves the user with sockets" do
-        list.find(2)[:sockets].should be_instance_of Array
+      it "retrieves the sockets in the hash" do
+        list.find(2).should have_key :sockets
       end
     end
 
