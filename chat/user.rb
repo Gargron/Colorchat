@@ -10,7 +10,6 @@ module Chat
     attr_reader :email
 
     # Public: Returns the md5-hash of the user e-mail
-    # String
     attr_reader :hash
 
     # Public: Returns the user role
