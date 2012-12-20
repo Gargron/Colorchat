@@ -24,7 +24,7 @@ module Chat
     end
 
     def self.list(message, *args)
-      message.chat.list.inspect
+      message.chat.list.users.inspect
     end
   end
 end

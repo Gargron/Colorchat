@@ -11,7 +11,7 @@ Dir["#{File.dirname(__FILE__)}/protocols/*/*.rb"].each { |file| require file }
 EventMachine.run do
   chat = Chat::Main.new
 
-  EventMachine::WebSocket.start(:host => '0.0.0.0', :port => 8050) do |socket|
+  EventMachine::WebSocket.start(:host => '0.0.0.0', :port => (ARGV[0] || 8050)) do |socket|
     connection = Protocols::WebSockets::ChatConnection.new socket, chat
 
     socket.onopen    {        connection.onopen }

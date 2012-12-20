@@ -30,9 +30,6 @@ module Protocols
       def onopen
         @user = Chat::User.new 0, "Guest", "guest@example.com", 1, "000000", false
         @chat.list.add(@user, @socket)
-
-        # Debug
-        puts @chat.list.inspect
       end
 
       # Public: Event triggered when the connection is closed
