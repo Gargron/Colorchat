@@ -8,22 +8,8 @@ require 'em-websocket'
 Dir["#{File.dirname(__FILE__)}/chat/*.rb"].each        { |file| require file }
 Dir["#{File.dirname(__FILE__)}/protocols/*/*.rb"].each { |file| require file }
 
-class ColorChat
-  # Public: The main room
-  attr_accessor :root_room
-
-  # Public: Users
-  attr_accessor :list
-
-  # Public: Initialize a new chat
-  def initialize
-    @root_room = Chat::Room.new("")
-    @list      = Chat::List.new
-  end
-end
-
 EventMachine.run do
-  chat = ColorChat.new
+  chat = Chat::Main.new
 
   EventMachine::WebSocket.start(:host => '0.0.0.0', :port => 8050) do |socket|
     connection = Protocols::WebSockets::ChatConnection.new socket, chat

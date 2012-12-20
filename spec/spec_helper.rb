@@ -11,13 +11,13 @@ require_relative '../chat/command'
 require_relative '../chat/message'
 require_relative '../chat/room'
 require_relative '../chat/list'
-require_relative '../colorchat'
+require_relative '../chat/main'
 
 RSpec.configure do |config|
   config.before :all do
     @redis = MockRedis.new
     Redis.stubs(:new).returns(@redis)
 
-    @chat  = ColorChat.new
+    @chat  = Chat::Main.new
   end
 end
