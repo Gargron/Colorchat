@@ -5,7 +5,7 @@ module Chat
 
     # Public: Create a new list
     def initialize
-      @items = []
+      @users = []
     end
 
     # Public: Add a user to the list and their socket too
