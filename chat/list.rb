@@ -16,6 +16,13 @@ module Chat
     #
     # Returns nothing
     def add(user, socket)
+      found = find(user.id)
+
+      if found.nil?
+        @users << { :user => user, :sockets => [socket] }
+      else
+        @users[found[:index]][:sockets] << socket
+      end
     end
 
     # Public: Remove socket of user from the list, remove
@@ -34,6 +41,22 @@ module Chat
     #
     # Returns hash with user and sockets
     def find(id)
+      index_at = -1
+      entry    = nil
+
+      @users.each_index do |i|
+        if @users[i][:user].id == id
+          index_at = i
+          entry = @users[i]
+          break
+        end
+      end
+
+      unless entry.nil?
+        entry[:index] = index_at
+      end
+
+      entry
     end
   end
 end
