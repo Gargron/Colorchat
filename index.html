@@ -4,40 +4,71 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Colorchat by Gargron</title>
-
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
     <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
   </head>
   <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/Gargron/Colorchat">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/Gargron/Colorchat/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/Gargron/Colorchat/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
     <div class="wrapper">
-      <header>
-        <h1>Colorchat</h1>
-        <p>Ruby and EventMachine-based webchat application supporting WebSockets and a Comet fallback</p>
 
-        <p class="view"><a href="https://github.com/Gargron/Colorchat">View the Project on GitHub <small>Gargron/Colorchat</small></a></p>
-
-
-        <ul>
-          <li><a href="https://github.com/Gargron/Colorchat/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/Gargron/Colorchat/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/Gargron/Colorchat">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
       <section>
+        <div id="title">
+          <h1>Colorchat</h1>
+          <p>Ruby and EventMachine-based webchat application supporting WebSockets and a Comet fallback</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/Gargron">Gargron</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></span>
+        </div>
+
         <h1>Colorchat</h1>
 
 <p>Ruby and EventMachine-based webchat application supporting WebSockets and a Comet fallback</p>
+
+<h3>About</h3>
+
+<p>I was working on the webchat of theColorless.net for many years. Now I want to open-source it,
+but drop legacy code and write it cleanly from scratch without having it stick too much
+to a brand. Ideally, I want anyone with a VPS to be able to run a chat like this.</p>
+
+<h3>Supposed advantages over other solutions</h3>
+
+<p>This chat is built to work with other authentication systems rather than contain one of its own.
+So it should be easier to integrate with websites generally. It should also be robust and lightweight.</p>
+
+<h3>Technologies used</h3>
+
+<p>EventMachine as the server framework with the EM-Websockets gem to handle WebSocket connections, and Redis for
+persistent memory and sessions.</p>
+
+<h3>To-do</h3>
+
+<ul>
+<li>Add methods for authentication and changing of user attributes using commands</li>
+<li>Add some kind of HTTP handler to serve the HTML/JS/CSS</li>
+<li>Consider EventMachine defers to optimize responsiveness</li>
+</ul>
       </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/Gargron">Gargron</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
+
     </div>
-    <script src="javascripts/scale.fix.js"></script>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
     
   </body>
 </html>
