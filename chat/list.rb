@@ -69,5 +69,12 @@ module Chat
 
       entry
     end
+
+    # Public: Return the user list as a JSON string
+    #
+    # Returns JSON string
+    def to_json
+      @users.map { |item| item[:user].to_hash }.to_json
+    end
   end
 end
