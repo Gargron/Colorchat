@@ -42,7 +42,7 @@
 
         client.onmessage = function (evt) {
           var data = JSON.parse(evt.data);
-          output.innerHTML += '<div>' + data.user.name + ': ' + data.text + '</div>';
+          output.innerHTML += '<div>' + (data.user === null ? 'System' : data.user.name) + ': ' + data.text + '</div>';
         };
 
         client.onerror = function (evt) {
