@@ -65,8 +65,12 @@ describe Chat::List do
     end
 
     describe "#find" do
-      it "finds the correct user" do
+      it "finds the correct user 1." do
         list.find(1)[:user].should eql user2
+      end
+
+      it "finds the correct user 2." do
+        list.find(2)[:user].should eql user1
       end
     end
   end
