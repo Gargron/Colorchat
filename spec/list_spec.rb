@@ -63,5 +63,11 @@ describe Chat::List do
         list.users.length.should eql 2
       end
     end
+
+    describe "#find" do
+      it "finds the correct user" do
+        list.find(1)[:user].should eql user2
+      end
+    end
   end
 end
