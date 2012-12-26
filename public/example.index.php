@@ -33,7 +33,10 @@
 
         client.onopen = function (evt) {
           alert('Connected');
-          client.send('/auth ' + AUTH);
+          
+          window.setTimeout(function () {
+            client.send('/auth ' + AUTH);
+          }, 100);
         };
 
         client.onclose = function (evt) {
