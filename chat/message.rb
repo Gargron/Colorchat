@@ -12,6 +12,9 @@ module Chat
     # Public: Returns chat
     attr_reader :chat
 
+    # Public: Returns the connection the message is initialzed from
+    attr_reader :connection
+
     # Public: Initializes a new message instance
     #
     # chat    - Chat from which the message is invoked
@@ -19,11 +22,12 @@ module Chat
     #           :type - Type of the message
     #           :user - Owner of the message (optional)
     #           :text - The contents of the message
-    def initialize(chat, options)
+    def initialize(chat, connection, options)
       @type = options[:type]
       @text = options[:text]
       @user = options[:user]
       @chat = chat
+      @connection = connection
     end
 
     # Public: Is the message for broadcast or for one client?
@@ -67,13 +71,14 @@ module Chat
     def execute!
       raise 'Message not executable' if !executable?
 
+      @type = :response
+
       begin
         @text = Command::send(command, *(arguments.unshift self))
       rescue ArgumentError => exc
         @text = "Argument error"
       end
 
-      @type = :response
       @user = nil
     end
 

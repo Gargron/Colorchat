@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Chat::Message do
   context "system" do
-    let(:message) { Chat::Message.new(@chat, { :type => :system, :text => "Hello" }) }
+    let(:message) { Chat::Message.new(@chat, {}, { :type => :system, :text => "Hello" }) }
 
     describe "#new" do
       it "takes 2 option arguments and creates a Message object" do
@@ -36,7 +36,7 @@ describe Chat::Message do
   end
 
   context "textual" do
-    let(:message) { Chat::Message.new(@chat, { :type => :text, :user => Chat::User.new(2, "Dummy", "dummy@example.com", 1, "ff0000", true), :text => "Hello there" }) }
+    let(:message) { Chat::Message.new(@chat, {}, { :type => :text, :user => Chat::User.new(2, "Dummy", "dummy@example.com", 1, "ff0000", true), :text => "Hello there" }) }
 
     describe "#new" do
       it "takes 3 option arguments and creates a Message object" do
@@ -70,7 +70,7 @@ describe Chat::Message do
   end
 
   context "with a command" do
-    let(:message) { Chat::Message.new(@chat, { :type => :text, :user => Chat::User.new(2, "Dummy", "dummy@example.com", 1, "ff0000", true), :text => "/ping" }) }
+    let(:message) { Chat::Message.new(@chat, {}, { :type => :text, :user => Chat::User.new(2, "Dummy", "dummy@example.com", 1, "ff0000", true), :text => "/ping" }) }
 
     describe "#executable?" do
       it "says if the message contains a command" do

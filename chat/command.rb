@@ -12,7 +12,9 @@ module Chat
     # Returns status
     def self.auth(message, key, *args)
       begin
+        message.chat.list.remove(0, message.connection)
         message.user.load key
+        message.chat.list.add(message.user, message.connection)
         "OK authenticated as #{message.user.name}"
       rescue Exception => err
         "Could not authenticate: #{err}"
@@ -24,7 +26,7 @@ module Chat
     # Returns status
     def self.mute(message, id, duration, *args)
       return "Insufficient rights" if message.user.role < 2
-      message.chat.list.find(id).mute!
+      message.chat.list.find(id)[:user].mute!
       "OK muting"
     end
 
@@ -33,7 +35,7 @@ module Chat
     # Returns status
     def self.unmute(message, id, *args)
       return "Insufficient rights" if message.user.role < 2
-      message.chat.list.find(id).unmute!
+      message.chat.list.find(id)[:user].unmute!
       "OK unmuting"
     end
 
@@ -48,6 +50,7 @@ module Chat
     # 
     # Returns tranformed string
     def self.me(message, *words)
+      message.type = :system
       "#{message.user.name} #{words.join(' ')}"
     end
 
