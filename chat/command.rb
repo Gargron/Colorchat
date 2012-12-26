@@ -62,7 +62,7 @@ module Chat
     # 
     # Returns commands
     def self.help(message, *args)
-      Command.class.instance_methods.join(' ')
+      Command.singleton_methods.join(' ')
     end
   end
 end
