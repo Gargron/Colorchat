@@ -13,7 +13,7 @@
     <script type="text/javascript">
       window.onload = function () {
         const WS_URI = 'ws://' + window.location.host + ':8050';
-        const AUTH   = '<?php echo $_COOKIE["auth"]; ?>';
+        const AUTH   = '<?php echo array_key_exists("auth", $_COOKIE) ? $_COOKIE["auth"] : ""; ?>';
 
         var input = document.getElementById('message'),
           output  = document.getElementById('messages'),
@@ -33,6 +33,7 @@
 
         client.onopen = function (evt) {
           alert('Connected');
+          client.send('/auth ' + AUTH);
         };
 
         client.onclose = function (evt) {
