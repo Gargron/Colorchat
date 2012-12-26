@@ -13,7 +13,7 @@ module Chat
     def self.auth(message, key, *args)
       begin
         message.chat.list.remove(0, message.connection)
-        message.user.load key
+        message.user = User.from_datastore key
         message.chat.list.add(message.user, message.connection)
         "OK authenticated as #{message.user.name}"
       rescue Exception => err
