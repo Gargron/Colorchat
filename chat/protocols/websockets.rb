@@ -36,7 +36,7 @@ module Chat
       # Returns nothing
       def onclose
         @room.unsubscribe @subscription_id
-        @chat.list.remove(@user.id, self) unless @user.nil?
+        @chat.list.remove(@user.id, self) unless @user.id == 0
       end
 
       # Public: Event triggered when data is transmitted through the connection

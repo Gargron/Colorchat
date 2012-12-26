@@ -1,7 +1,7 @@
 module Chat
   class Message
-    # Public: Returns type of message
-    attr_reader :type
+    # Public: Gets/sets type of message
+    attr_accessor :type
 
     # Public: Returns content of message
     attr_reader :text
