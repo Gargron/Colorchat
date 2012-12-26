@@ -28,8 +28,6 @@ module Chat
       #
       # Returns nothing
       def onopen
-        @user = Chat::User.new 0, "Guest", "guest@example.com", 1, "000000", false
-        @chat.list.add(@user, self)
       end
 
       # Public: Event triggered when the connection is closed
@@ -37,7 +35,7 @@ module Chat
       # Returns nothing
       def onclose
         @room.unsubscribe @subscription_id
-        @chat.list.remove(@user.id, self)
+        @chat.list.remove(@user.id, self) unless @user.nil?
       end
 
       # Public: Event triggered when data is transmitted through the connection
