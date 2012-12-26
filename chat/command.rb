@@ -7,7 +7,7 @@ module Chat
     def self.auth(message, key, *args)
       begin
         message.user.load key
-        "OK authenticated"
+        "OK authenticated as #{message.user.name}"
       rescue Exception => err
         "Could not authenticate: #{err}"
       end
@@ -25,6 +25,10 @@ module Chat
 
     def self.list(message, *args)
       message.chat.list.to_json
+    end
+
+    def self.me(message, *words)
+      "#{message.user.name} #{words.join(' ')}"
     end
   end
 end
