@@ -17,7 +17,8 @@
 
         var input = document.getElementById('message'),
           output  = document.getElementById('messages'),
-          client  = new WebSocket(WS_URI);
+          client  = new WebSocket(WS_URI),
+          escapeHTML;
 
         if (typeof JSON === "undefined") {
           alert('JSON parsing not supported in browser, include json2.js or whatever in this example page');
@@ -47,12 +48,19 @@
 
         client.onmessage = function (evt) {
           var data = JSON.parse(evt.data);
-          output.innerHTML += '<div>' + (data.user === null ? 'System' : data.user.name) + ': ' + data.text + '</div>';
+          output.innerHTML += '<div>' + (data.user === null ? 'System' : data.user.name) + ': ' + escapeHTML(data.text) + '</div>';
         };
 
         client.onerror = function (evt) {
           alert('Error');
         };
+
+        escapeHTML = function (str) {
+          var container = document.createElement('div');
+          container.appendChild(document.createTextNode(str));
+
+          return container.innerHTML;
+        }
       };
     </script>
   </body>
