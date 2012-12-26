@@ -18,6 +18,8 @@ module Chat
     def add(user, connection)
       found = find(user.id)
 
+      puts "List#add, #{user.id}, #{found.inspect}"
+
       if found.nil?
         @users.push({ :user => user, :connections => [connection] })
       else
@@ -34,6 +36,8 @@ module Chat
     # Returns nothing
     def remove(id, connection)
       found = find(id)
+
+      puts "List#remove, #{id}, #{found.inspect}"
 
       if found.nil?
         return
