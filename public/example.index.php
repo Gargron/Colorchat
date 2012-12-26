@@ -12,7 +12,7 @@
 
     <script type="text/javascript">
       window.onload = function () {
-        const WS_URI = 'example.com:8050';
+        const WS_URI = 'ws://' + window.location.host + ':8050';
         const AUTH   = '<?php echo $_COOKIE["auth"]; ?>';
 
         var input = document.getElementById('message'),
