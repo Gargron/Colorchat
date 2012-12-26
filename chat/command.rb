@@ -62,7 +62,7 @@ module Chat
     # 
     # Returns commands
     def self.help(message, *args)
-      "#{self.instance_methods(false).join(' ')}"
+      self.instance_methods.join(' ')
     end
   end
 end
