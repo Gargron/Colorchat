@@ -19,7 +19,7 @@ module Chat
       found = find(user.id)
 
       if found.nil?
-        @users.push { :user => user, :connections => [connection] }
+        @users.push({ :user => user, :connections => [connection] })
       else
         @users[found[:index]][:connections].push connection
       end
