@@ -32,7 +32,7 @@ module Chat
     # connection - Connection
     #
     # Returns nothing
-    def remove(id, socket)
+    def remove(id, connection)
       found = find(id)
 
       if found.nil?
