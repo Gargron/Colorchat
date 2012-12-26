@@ -43,7 +43,7 @@ describe Chat::List do
 
     describe "#remove" do
       before do
-        list.remove(user.id, connection)
+        list.remove(user1.id, connection)
       end
 
       it "removes the user entry completely" do
