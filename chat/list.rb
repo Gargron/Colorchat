@@ -75,9 +75,9 @@ module Chat
     # Returns JSON string
     def to_json
       @users.map { |item|
-        item[:user].to_hash.merge({ :rooms => item[:connections].map({ |conn|
+        item[:user].to_hash.merge({ :rooms => item[:connections].map { |conn|
           conn.room.identifier
-        })})
+        } })
       }.to_json
     end
   end
