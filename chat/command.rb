@@ -54,8 +54,15 @@ module Chat
     # Public: Change the room of the connection
     # 
     # Returns status
-    def self.enter(identifier, *args)
+    def self.enter(message, identifier, *args)
       # TODO
+    end
+
+    # Public: List possible commands
+    # 
+    # Returns commands
+    def self.help(message, *args)
+      "#{self.instance_methods(false).join(' ')}"
     end
   end
 end
