@@ -4,7 +4,6 @@ describe Chat::List do
   let(:list)  { Chat::List.new }
   let(:user1) { Chat::User.new 2, "Dummy", "dummy@example.com", 1, "ff0000", true }
   let(:user2) { Chat::User.new 1, "Joe", "joe@example.com", 1, "0000ff", false }
-  let(:connection) { Hash.new }
 
   describe "#initialize" do
     it "creates new instance of List" do
@@ -18,7 +17,7 @@ describe Chat::List do
 
   context "users and connections" do
     before :all do
-      list.add(user1, connection)
+      list.add(user1, {})
     end
 
     describe "#add" do
@@ -43,7 +42,7 @@ describe Chat::List do
 
     describe "#remove" do
       before do
-        list.remove(user1.id, connection)
+        list.remove(user1.id, {})
       end
 
       it "removes the user entry completely" do
@@ -54,8 +53,8 @@ describe Chat::List do
 
   context "more users" do
     before :all do
-      list.add(user1, connection)
-      list.add(user2, connection)
+      list.add(user1, {})
+      list.add(user2, {})
     end
 
     describe "#add" do
@@ -72,6 +71,21 @@ describe Chat::List do
       it "finds the correct user 2." do
         list.find(2)[:user].should eql user1
       end
+    end
+  end
+
+  context "more connections" do
+    before :all do
+      list.add(user1, Hash.new({:a => :b}))
+      list.add(user1, Hash.new({:b => :c}))
+    end
+
+    it "places the connections into just one user entry" do
+      list.users.length.should eql 1
+    end
+
+    it "contains both connections" do
+      list.find(2)[:connections].length.should eql 2
     end
   end
 end
