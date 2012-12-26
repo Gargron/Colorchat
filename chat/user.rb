@@ -56,7 +56,7 @@ module Chat
     #
     # Returns nothing
     def load(identifier)
-      user_hash = JSON.parse(redis("get", "user:session:#{identifier}"))
+      user_hash = JSON.parse(self.class.redis("get", "user:session:#{identifier}"))
       raise "Given user is empty" if user_hash.nil?
 
       @id    = user_hash['id']
