@@ -28,6 +28,7 @@ module Chat
       #
       # Returns nothing
       def onopen
+        @user = Chat::User.new(0, "", "", 0, "", false)
       end
 
       # Public: Event triggered when the connection is closed

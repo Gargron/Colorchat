@@ -89,7 +89,7 @@ module Chat
       muted  = !!self.class.redis("get", "chat:mute:#{@name}")
       banned = !!self.class.redis("get", "ban:#{@id}")
 
-      !(muted || banned)
+      !(muted || banned || @id == 0)
     end
 
     # Public: Transforms the instance of User into a simple hash object
