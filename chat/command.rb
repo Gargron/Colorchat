@@ -8,8 +8,8 @@ module Chat
       begin
         message.user.load key
         "OK authenticated"
-      rescue
-        "Could not authenticate"
+      rescue Exception => err
+        "Could not authenticate: #{err}"
       end
     end
 
