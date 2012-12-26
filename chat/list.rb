@@ -1,6 +1,6 @@
 module Chat
   class List
-    # Public: The array that stores the users together with their sockets
+    # Public: The array that stores the users together with their connections
     attr_reader :users
 
     # Public: Create a new list
@@ -8,28 +8,28 @@ module Chat
       @users = []
     end
 
-    # Public: Add a user to the list and their socket too
-    # If a user is already in the list, add the socket
+    # Public: Add a user to the list and their connection too
+    # If a user is already in the list, add the connection
     #
-    # user   - User
-    # socket - Connection
+    # user       - User
+    # connection - Connection
     #
     # Returns nothing
-    def add(user, socket)
+    def add(user, connection)
       found = find(user.id)
 
       if found.nil?
-        @users << { :user => user, :sockets => [socket] }
+        @users << { :user => user, :connections => [connection] }
       else
-        @users[found[:index]][:sockets] << socket
+        @users[found[:index]][:connections] << connection
       end
     end
 
-    # Public: Remove socket of user from the list, remove
-    # user if no sockets are left
+    # Public: Remove connection of user from the list, remove
+    # user if no connections are left
     #
-    # id     - User ID
-    # socket - Connection
+    # id         - User ID
+    # connection - Connection
     #
     # Returns nothing
     def remove(id, socket)
@@ -38,19 +38,19 @@ module Chat
       if found.nil?
         return
       else
-        @users[found[:index]][:sockets].delete socket
+        @users[found[:index]][:connections].delete connection
 
-        if @users[found[:index]][:sockets].empty?
+        if @users[found[:index]][:connections].empty?
           @users.delete_at found[:index]
         end
       end
     end
 
-    # Public: Find a user and their sockets
+    # Public: Find a user and their connections
     #
     # id - User ID
     #
-    # Returns hash with user and sockets
+    # Returns hash with user and connections
     def find(id)
       index_at = -1
       entry    = nil
@@ -74,7 +74,11 @@ module Chat
     #
     # Returns JSON string
     def to_json
-      @users.map { |item| item[:user].to_hash }.to_json
+      @users.map { |item|
+        item[:user].to_hash.merge({ :rooms => item[:connections].map({ |conn|
+          conn.room.identifier
+        })})
+      }.to_json
     end
   end
 end
