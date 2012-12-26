@@ -15,7 +15,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 
   $redis = new Redis();
-  $redis->connect();
+  $redis->connect('127.0.0.1');
 
   $newID      = $redis->incr('user:ids');
   $identifier = md5(uniqid());
