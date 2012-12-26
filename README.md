@@ -30,3 +30,7 @@ To run those examples, you will need to point your HTTP server of choice (nginx,
 * Add methods for authentication and changing of user attributes using commands
 * Add some kind of HTTP handler to serve the HTML/JS/CSS
 * Consider EventMachine defers to optimize responsiveness
+
+### License
+
+Colorchat is released under the [MIT license](http://www.opensource.org/licenses/MIT).
