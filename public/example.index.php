@@ -33,10 +33,12 @@
 
         client.onopen = function (evt) {
           alert('Connected');
-          
+
           window.setTimeout(function () {
-            client.send('/auth ' + AUTH);
-          }, 100);
+            if (client.readyState === 1 && AUTH.length > 0) {
+              client.send('/auth ' + AUTH);
+            }
+          }, 300);
         };
 
         client.onclose = function (evt) {
