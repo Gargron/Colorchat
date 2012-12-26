@@ -34,7 +34,7 @@ module Chat
     #
     # Returns the boolean value
     def public?
-      [:system, :text].include?(@type) && !@user.nil? && @user.can_talk?
+      [:system, :text].include?(@type) && (@type == :system || (!@user.nil? && @user.can_talk?))
     end
 
     # Public: Transforms the instance of Message into a hash object
