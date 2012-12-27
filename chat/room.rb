@@ -73,7 +73,13 @@ module Chat
     # 
     # Returns Hash
     def tree
-      { @identifier => @children.map { |room| room.tree } }
+      children = []
+      
+      @children.each do |room|
+        children << room.tree
+      end
+
+      { @identifier => children }
     end
 
     # Public: JSON representation of the tree structure of the room and 
