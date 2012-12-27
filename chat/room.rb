@@ -64,7 +64,7 @@ module Chat
     def shout(data)
       push data
 
-      @children.each do |room|
+      @children.each_value do |room|
         room.shout data
       end
     end
@@ -74,8 +74,8 @@ module Chat
     # Returns Hash
     def tree
       children = []
-      
-      @children.each do |room|
+
+      @children.each_value do |room|
         children << room.tree
       end
 
