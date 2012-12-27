@@ -45,5 +45,11 @@ describe Chat::Room do
         room.get("test.whoop").should eql even_childer_room
       end
     end
+
+    describe "#tree" do
+      it "retrieves the correct tree structure" do
+        room.tree.should eql {"" => [{"test" => [{"whoop" => []}]}]}
+      end
+    end
   end
 end
