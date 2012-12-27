@@ -45,7 +45,7 @@ EventMachine.run do
     socket.onmessage { |data| connection.onmessage data }
 
     socket.onerror do |error|
-      puts "[#{Time.now}][WebSocket] #{Socket.unpack_sockaddr_in(socket.get_peername).join(':')} - Connection error"
+      puts "[#{Time.now}][WebSocket] #{Socket.unpack_sockaddr_in(socket.get_peername).join(':')} - Connection error: #{error}"
     end
   end
 end
