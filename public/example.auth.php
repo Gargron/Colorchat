@@ -5,11 +5,18 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     throw new Exception("Please install the PHPRedis extension");
   }
 
+  # Escape all incoming POST data just in case
+  foreach($_POST as &$value) {
+    $value = htmlspecialchars($value);
+  }
+
+  # Trim empty space around strings
   $name  = trim($_POST['name']);
   $email = trim($_POST['email']);
   $color = trim($_POST['color']);
   $nsfw  = trim($_POST['nsfw']);
 
+  # This is the most basic validation
   if(empty($name) || empty($email) || empty($color) || empty($nsfw)) {
     throw new Exception("Invalid input, this is an example script, please play by rules");
   }
@@ -33,6 +40,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   $redis->setex('user:session:' . $identifier, 3600 * 6, json_encode($user));
   setcookie('auth', $identifier, time() + (3600 * 6));
+
+  # P.S. Don't quote this on security. This is just an example script.
 }
 
 ?>

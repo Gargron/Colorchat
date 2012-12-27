@@ -26,6 +26,8 @@
         }
 
         input.onkeyup = function (evt) {
+          // Send messages when ENTER is pressed inside the input field
+          // but only if the connection is ready
           if (evt.keyCode === 13 && client.readyState === 1) {
             client.send(input.value);
             input.value = '';
@@ -35,6 +37,8 @@
         client.onopen = function (evt) {
           alert('Connected');
 
+          // Defer authentication to let the browser finish
+          // establishing connection
           window.setTimeout(function () {
             if (client.readyState === 1 && AUTH.length > 0) {
               client.send('/auth ' + AUTH);
