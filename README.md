@@ -34,6 +34,44 @@ To run those examples, you will need to point your HTTP server of choice (nginx,
 * Add enter/leave/switch announcements
 * Let unused rooms expire
 
+### In-chat commands
+
+#### ping
+
+Returns `pong`.
+
+#### auth [identifier]
+
+Authenticates user based on session identifier.
+
+#### mute [user ID] [duration]
+
+Mutes a user for a period of time in seconds.
+
+#### unmute [user ID]
+
+Removes a mute on a user.
+
+#### list
+
+Retrieves the list of online users in JSON format.
+
+#### rooms
+
+Retrieves the existing chat rooms in JSON format.
+
+#### me [words] ...
+
+Broadcasts an action in third-person.
+
+#### enter [identifier]
+
+Switch to a different chatroom. Use `.` as separator between chat room names to enter nested rooms. All rooms are nested inside `main`.
+
+#### help
+
+List available commands.
+
 ### License
 
 Colorchat is released under the [MIT license](http://www.opensource.org/licenses/MIT).
