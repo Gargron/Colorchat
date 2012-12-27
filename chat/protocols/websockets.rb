@@ -54,6 +54,26 @@ module Chat
           @socket.send(message.to_json)
         end
       end
+
+      # Public: Change room
+      # 
+      # Returns nothing
+      def change_room(identifier)
+        found = @chat.root_room.get(identifier)
+        name  = identifier.split(".").last
+
+        if found.identifier != name
+          # The room that was requested did not exist
+          room = Chat::Room.new name
+          found.append room
+        else
+          room = found
+        end
+
+        @room.unsubscribe @subscription_id
+        @room = room
+        @subscription_id = @room.subscribe { |data| @socket.send data.encode "UTF-8" }
+      end
     end
   end
 end

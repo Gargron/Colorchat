@@ -57,7 +57,8 @@ module Chat
     # 
     # Returns status
     def self.enter(message, identifier, *args)
-      # TODO
+      message.connection.change_room identifier
+      "Switched to room #{identifier}"
     end
 
     # Public: List possible commands

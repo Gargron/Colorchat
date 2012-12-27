@@ -49,6 +49,7 @@ module Chat
       room        = self
 
       identifiers.each do |identifier|
+        break if room.children[identifier].nil?
         room = room.children[identifier]
       end
 
