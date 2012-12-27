@@ -68,5 +68,20 @@ module Chat
         room.shout data
       end
     end
+
+    # Public: Get recursive Hash of the room structure
+    # 
+    # Returns Hash
+    def tree
+      { @identifier => @children.map { |room| room.tree } }
+    end
+
+    # Public: JSON representation of the tree structure of the room and 
+    # its children
+    # 
+    # Returns JSON string
+    def to_json
+      tree.to_json
+    end
   end
 end

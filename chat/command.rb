@@ -45,6 +45,13 @@ module Chat
       message.chat.list.to_json
     end
 
+    # Public: List rooms
+    # 
+    # Returns JSON string
+    def self.rooms(message, *args)
+      message.chat.root_room.to_json
+    end
+
     # Public: Transform something into a third-person thing
     # 
     # Returns tranformed string
