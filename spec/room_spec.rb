@@ -48,7 +48,7 @@ describe Chat::Room do
 
     describe "#tree" do
       it "retrieves the correct tree structure" do
-        room.tree.should eql {"" => [{"test" => [{"whoop" => []}]}]}
+        room.tree.should eql({ "" => [{ "test" => [{ "whoop" => [] }] }] })
       end
     end
   end
