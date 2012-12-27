@@ -37,11 +37,15 @@ EventMachine.run do
   chat = Chat::Main.new
 
   EventMachine::WebSocket.start(:host => '0.0.0.0', :port => (ARGV[0] || 8050)) do |socket|
-    puts "[#{Time.now}] WebSocket connection intialized - #{Socket.unpack_sockaddr_in(socket.get_peername).join(':')}"
+    puts "[#{Time.now}][WebSocket] #{Socket.unpack_sockaddr_in(socket.get_peername).join(':')} - Connection initialized"
     connection = Chat::Protocols::WebSockets.new socket, chat
 
     socket.onopen    {        connection.onopen }
     socket.onclose   {        connection.onclose }
     socket.onmessage { |data| connection.onmessage data }
+
+    socket.onerror do |error|
+      puts "[#{Time.now}][WebSocket] #{Socket.unpack_sockaddr_in(socket.get_peername).join(':')} - Connection error"
+    end
   end
 end
