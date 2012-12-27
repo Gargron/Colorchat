@@ -23,6 +23,8 @@
 require 'yaml'
 require 'redis'
 require 'json'
+require 'time'
+require 'socket'
 require 'digest/md5'
 require 'eventmachine'
 require 'em-websocket'
@@ -31,11 +33,11 @@ Dir["#{File.dirname(__FILE__)}/chat/*.rb"].each           { |file| require file 
 Dir["#{File.dirname(__FILE__)}/chat/protocols/*.rb"].each { |file| require file }
 
 EventMachine.run do
-  puts "Starting Colorchat..."
+  puts "[#{Time.now}] Starting Colorchat"
   chat = Chat::Main.new
 
   EventMachine::WebSocket.start(:host => '0.0.0.0', :port => (ARGV[0] || 8050)) do |socket|
-    puts "WebSocket connection opened"
+    puts "[#{Time.now}] WebSocket connection intialized - #{Socket.unpack_sock_addr_in(socket.get_peername).join(':')}"
     connection = Chat::Protocols::WebSockets.new socket, chat
 
     socket.onopen    {        connection.onopen }
