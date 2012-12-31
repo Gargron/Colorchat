@@ -31,8 +31,9 @@ To run those examples, you will need to point your HTTP server of choice (nginx,
 * Add some kind of HTTP handler to serve the HTML/JS/CSS
 * Consider EventMachine defers to optimize responsiveness
 * ~~Add endpoints to switch rooms~~
-* Add enter/leave/switch announcements
+* ~~Add enter/leave/switch announcements~~
 * Let unused rooms expire
+* Add Comet handler
 
 ### In-chat commands
 
