@@ -20,7 +20,7 @@ describe Chat::List do
 
   context "users and connections" do
     before :all do
-      list.add(user1, {})
+      list.add(user1, connection1)
     end
 
     describe "#add" do
@@ -79,8 +79,8 @@ describe Chat::List do
 
   context "more connections" do
     before :all do
-      list.add(user1, connection1))
-      list.add(user1, connection1))
+      list.add(user1, connection1)
+      list.add(user1, connection2)
     end
 
     it "places the connections into just one user entry" do
