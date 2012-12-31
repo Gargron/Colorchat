@@ -23,6 +23,8 @@ module Chat
       else
         @users[found[:index]][:connections].push connection
       end
+
+      @chat.root_room.shout Chat::Message.system "#{user.name} connected to #{connection.room.identifier}", user
     end
 
     # Public: Remove connection of user from the list, remove
@@ -41,7 +43,10 @@ module Chat
         @users[found[:index]][:connections].delete connection
 
         if @users[found[:index]][:connections].empty?
+          @chat.root_room.shout Chat::Message.system "#{user.name} left", @users[found[:index]][:user]
           @users.delete_at found[:index]
+        else
+          @chat.root_room.shout Chat::Message.system "#{user.name} left #{connection.room.identifier}", @users[found[:index]][:user]
         end
       end
     end

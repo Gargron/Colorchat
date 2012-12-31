@@ -17,17 +17,25 @@ module Chat
 
     # Public: Initializes a new message instance
     #
-    # chat    - Chat from which the message is invoked
-    # options - Hash options used to instantiate the message polymorphically
-    #           :type - Type of the message
-    #           :user - Owner of the message (optional)
-    #           :text - The contents of the message
+    # chat       - Chat from which the message is invoked
+    # connection - The Connection the message is initialized from
+    # options    - Hash options used to instantiate the message polymorphically
+    #                :type - Type of the message
+    #                :user - Owner of the message (optional)
+    #                :text - The contents of the message
     def initialize(chat, connection, options)
       @type = options[:type]
       @text = options[:text]
       @user = options[:user]
       @chat = chat
       @connection = connection
+    end
+
+    # Public: Initialize a new system message as a shortcut
+    # 
+    # Returns Message
+    def self.system(str, user)
+      self.new nil, nil, { :type => :system, :text => str, :user => user }
     end
 
     # Public: Is the message for broadcast or for one client?
