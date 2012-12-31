@@ -1,9 +1,12 @@
 require 'spec_helper'
 
 describe Chat::List do
-  let(:list)  { Chat::List.new(Chat::Main.new) }
+  let(:chat)  { Chat::Main.new }
+  let(:list)  { Chat::List.new(chat) }
   let(:user1) { Chat::User.new 2, "Dummy", "dummy@example.com", 1, "ff0000", true }
   let(:user2) { Chat::User.new 1, "Joe", "joe@example.com", 1, "0000ff", false }
+  let(:connection1) { Chat::Protocols::WebSockets.new(nil, chat) }
+  let(:connection2) { Chat::Protocols::WebSockets.new(nil, chat) }
 
   describe "#initialize" do
     it "creates new instance of List" do
@@ -42,7 +45,7 @@ describe Chat::List do
 
     describe "#remove" do
       before do
-        list.remove(user1.id, {})
+        list.remove(user1.id, connection1)
       end
 
       it "removes the user entry completely" do
@@ -53,8 +56,8 @@ describe Chat::List do
 
   context "more users" do
     before :all do
-      list.add(user1, {})
-      list.add(user2, {})
+      list.add(user1, connection1)
+      list.add(user2, connection1)
     end
 
     describe "#add" do
@@ -76,8 +79,8 @@ describe Chat::List do
 
   context "more connections" do
     before :all do
-      list.add(user1, Hash.new({:a => :b}))
-      list.add(user1, Hash.new({:b => :c}))
+      list.add(user1, connection1))
+      list.add(user1, connection1))
     end
 
     it "places the connections into just one user entry" do
