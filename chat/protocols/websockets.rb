@@ -73,6 +73,8 @@ module Chat
         @room.unsubscribe @subscription_id
         @room = room
         @subscription_id = @room.subscribe { |data| @socket.send data.encode "UTF-8" }
+
+        @chat.root_room.shout Chat::Message.system("#{@user.name} switched to #{@room.identifier}", @user).to_json
       end
     end
   end
