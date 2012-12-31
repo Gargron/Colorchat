@@ -3,8 +3,12 @@ module Chat
     # Public: The array that stores the users together with their connections
     attr_reader :users
 
+    # Public: Chat object
+    attr_reader :chat
+
     # Public: Create a new list
-    def initialize
+    def initialize(chat)
+      @chat  = chat
       @users = []
     end
 
