@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Chat::List do
-  let(:list)  { Chat::List.new }
+  let(:list)  { Chat::List.new(Chat::Main.new) }
   let(:user1) { Chat::User.new 2, "Dummy", "dummy@example.com", 1, "ff0000", true }
   let(:user2) { Chat::User.new 1, "Joe", "joe@example.com", 1, "0000ff", false }
 

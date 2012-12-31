@@ -8,8 +8,8 @@ module Chat
 
     # Public: Initialize a new chat
     def initialize
-      @root_room = Chat::Room.new("main")
-      @list      = Chat::List.new
+      @root_room = Chat::Room.new "main"
+      @list      = Chat::List.new self
     end
   end
 end
