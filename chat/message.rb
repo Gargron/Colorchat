@@ -35,7 +35,7 @@ module Chat
     # 
     # Returns Message
     def self.system(str, user)
-      self.new(nil, nil, { :type => :system, :text => Hash.new[ :action => str, :actor => user ].to_json, :user => nil })
+      self.new(nil, nil, { :type => :system, :text => Hash.new[ "action" => str, "actor" => user.to_hash ].to_json, :user => nil })
     end
 
     # Public: Is the message for broadcast or for one client?
