@@ -13,6 +13,8 @@ require_relative '../chat/room'
 require_relative '../chat/list'
 require_relative '../chat/main'
 
+require_relative '../chat/protocols/websockets'
+
 RSpec.configure do |config|
   config.before :all do
     @redis = MockRedis.new
