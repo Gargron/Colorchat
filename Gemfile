@@ -4,7 +4,6 @@ gem "json"
 gem "eventmachine"
 gem "em-websocket"
 gem "em-redis"
-gem "fiber"
 
 group :test do
   gem "rspec"
