@@ -14,10 +14,9 @@ module Chat
       begin
         Fiber.new do
           message.user.load key
+          message.chat.list.add(message.user, message.connection)
+          "OK authenticated as #{message.user.name}"
         end.resume
-        
-        message.chat.list.add(message.user, message.connection)
-        "OK authenticated as #{message.user.name}"
       rescue Exception => err
         "Could not authenticate: #{err}"
       end
