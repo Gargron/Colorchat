@@ -115,7 +115,7 @@ module Chat
     # args - zero or more arguments for the redis command
     #
     # Returns redis response
-    def self.redis(cmd, *args)
+    def redis(cmd, *args)
       fiber = Fiber.current
  
       Chat.redis.send(cmd, *args) do |response|
