@@ -44,7 +44,7 @@ module Chat
     def public?
       public = false
 
-      Fiber.new
+      Fiber.new do
         public = ([:system, :text].include?(@type) && (@type == :system || @user.can_talk?))
       end.resume
 
