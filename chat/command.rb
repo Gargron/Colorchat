@@ -17,7 +17,7 @@ module Chat
         end.resume
 
         message.chat.list.add(message.user, message.connection)
-        "OK authenticated as #{message.user.name}"
+        "OK authenticated"
       rescue Exception => err
         "Could not authenticate: #{err}"
       end
