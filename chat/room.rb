@@ -34,7 +34,7 @@ module Chat
     # 
     # Returns boolean
     def remove_empty
-      empty = @connections.empty?
+      empty = @subs.empty?
 
       @children.each_value do |room|
         if room.remove_empty
