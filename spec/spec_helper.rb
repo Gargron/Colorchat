@@ -4,6 +4,7 @@ require 'redis'
 require 'mock_redis'
 require 'json'
 require 'eventmachine'
+require 'em-rspec'
 require 'digest/md5'
 
 require_relative '../chat/user'
