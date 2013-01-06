@@ -12,15 +12,12 @@ module Chat
     # Returns status
     def self.auth(message, key, *args)
       begin
-        name = ''
-
         Fiber.new do
           message.user.load key
-          name = message.user.name
         end.resume
 
         message.chat.list.add(message.user, message.connection)
-        "OK authenticated as #{name}"
+        "OK authenticated as #{message.user.name}"
       rescue Exception => err
         "Could not authenticate: #{err}"
       end
