@@ -51,5 +51,15 @@ describe Chat::Room do
         room.tree.should eql({ "" => [{ "test" => [{ "whoop" => [] }] }] })
       end
     end
+
+    describe "#remove" do
+      before do 
+        room.remove(child_room)
+      end
+
+      it "removes the child room" do
+        room.children["test"].should be_nil
+      end
+    end
   end
 end

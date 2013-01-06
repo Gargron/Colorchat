@@ -29,6 +29,26 @@ module Chat
       @parent = parent
     end
 
+    # Public: Remove room if it is empty. Only true if the room has no open connections and if
+    # its children rooms don't have any connections. Returns true if the room is not empty.
+    # 
+    # Returns boolean
+    def remove_empty
+      empty = @connections.empty?
+
+      @children.each_value do |room|
+        if room.remove_empty
+          empty = false
+        end
+      end
+
+      if empty && !@parent.nil?
+        @parent.remove self
+      end
+
+      empty
+    end
+
     # Public: Create a nested room
     #
     # room
@@ -37,6 +57,15 @@ module Chat
     def append(room)
       @children[room.identifier] = room
       room.attribute_to(self)
+    end
+
+    # Public: Remove a nested room
+    # 
+    # room
+    # 
+    # Returns nothing
+    def remove(room)
+      @children.delete room.identifier
     end
 
     # Public: Resolve a room from a path

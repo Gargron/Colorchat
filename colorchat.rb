@@ -37,6 +37,11 @@ EventMachine.run do
   puts "[#{Time.now}] Starting Colorchat"
   chat = Chat::Main.new
 
+  EventMachine::PeriodicTimer.new(60) do
+    puts "[#{Time.now}] Removing empty rooms"
+    chat.root_room.remove_empty
+  end
+
   EventMachine::WebSocket.start(:host => '0.0.0.0', :port => (ARGV[0] || 8050)) do |socket|
     puts "[#{Time.now}][WebSocket] #{Socket.unpack_sockaddr_in(socket.get_peername).join(':')} - Connection initialized"
     connection = Chat::Protocols::WebSockets.new socket, chat

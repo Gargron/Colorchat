@@ -28,7 +28,11 @@ module Chat
     # Returns status
     def self.mute(message, id, duration, *args)
       return "Insufficient rights" if message.user.role < 2
-      message.chat.list.find(id)[:user].mute!
+
+      Fiber.new do
+        message.chat.list.find(id)[:user].mute!
+      end.resume
+      
       "OK muting"
     end
 
@@ -37,7 +41,11 @@ module Chat
     # Returns status
     def self.unmute(message, id, *args)
       return "Insufficient rights" if message.user.role < 2
-      message.chat.list.find(id)[:user].unmute!
+
+      Fiber.new do
+        message.chat.list.find(id)[:user].unmute!
+      end.resume
+
       "OK unmuting"
     end
 

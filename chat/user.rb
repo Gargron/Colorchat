@@ -1,4 +1,7 @@
 module Chat
+  # Public: Redis singleton call
+  # 
+  # Returns EM-Redis connection
   def self.redis
     @redis ||= EM::Protocols::Redis.connect
   end
