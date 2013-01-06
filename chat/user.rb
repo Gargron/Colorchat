@@ -1,4 +1,8 @@
 module Chat
+  def self.redis
+    @redis ||= EM::Protocols::Redis.connect
+  end
+
   class User
     # Public: Returns the user ID
     attr_reader :id
@@ -39,24 +43,13 @@ module Chat
       @nsfw  = nsfw
     end
 
-    # Public: New instance of User from a datastore session identifier
-    #
-    # identifier - key for datastore look-up
-    #
-    # Returns an instance of User
-    def self.from_datastore(identifier)
-      user_hash = JSON.parse(redis("get", "user:session:#{identifier}"))
-      raise "Given user is empty" if user_hash.nil?
-      self.new user_hash['id'], user_hash['name'], user_hash['email'], user_hash['role'], user_hash['color'], user_hash['nsfw']
-    end
-
     # Public: Update current instance by loading data from a datastore
     #
     # identifier - key for datastore look-up
     #
     # Returns nothing
     def load(identifier)
-      user_hash = JSON.parse(self.class.redis("get", "user:session:#{identifier}"))
+      user_hash = JSON.parse(redis("get", "user:session:#{identifier}"))
       raise "Given user is empty" if user_hash.nil?
 
       @id    = user_hash['id']
@@ -72,22 +65,22 @@ module Chat
     #
     # Returns nothing
     def mute!
-      self.class.redis("set", "chat:mute:#{@name}", true)
+      redis("set", "chat:mute:#{@name}", true)
     end
 
     # Public: Remove the mute on the user
     #
     # Returns nothing
     def unmute!
-      self.class.redis("del", "chat:mute:#{@name}")
+      redis("del", "chat:mute:#{@name}")
     end
 
     # Public: Whether the user is allowed to talk right now
     #
     # Returns a boolean value
     def can_talk?
-      muted  = !!self.class.redis("get", "chat:mute:#{@name}")
-      banned = !!self.class.redis("get", "ban:#{@id}")
+      muted  = !!redis("get", "chat:mute:#{@name}")
+      banned = !!redis("get", "ban:#{@id}")
 
       !(muted || banned || @id == 0)
     end
@@ -123,10 +116,13 @@ module Chat
     #
     # Returns redis response
     def self.redis(cmd, *args)
-      redis  = Redis.new
-      result = redis.send(cmd, *args)
-      redis.quit
-      result
+      fiber = Fiber.current
+ 
+      Chat.redis.send(cmd, *args) do |response|
+        fiber.resume response
+      end
+ 
+      Fiber.yield
     end
   end
 end

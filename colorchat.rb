@@ -21,13 +21,14 @@
 #++
 
 require 'yaml'
-require 'redis'
 require 'json'
 require 'time'
 require 'socket'
 require 'digest/md5'
 require 'eventmachine'
+require 'em-redis'
 require 'em-websocket'
+require 'fiber'
 
 Dir["#{File.dirname(__FILE__)}/chat/*.rb"].each           { |file| require file }
 Dir["#{File.dirname(__FILE__)}/chat/protocols/*.rb"].each { |file| require file }

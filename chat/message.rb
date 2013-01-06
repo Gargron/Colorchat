@@ -42,7 +42,13 @@ module Chat
     #
     # Returns the boolean value
     def public?
-      [:system, :text].include?(@type) && (@type == :system || @user.can_talk?)
+      public = false
+
+      Fiber.new
+        public = ([:system, :text].include?(@type) && (@type == :system || @user.can_talk?))
+      end.resume
+
+      public
     end
 
     # Public: Transforms the instance of Message into a hash object
