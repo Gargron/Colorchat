@@ -56,5 +56,5 @@ EventMachine.run do
     end
   end
 
-  EventMachine.start_server('0.0.0.0', (ARGV[1] || 8060), Chat::Protocols::Http)
+  EventMachine.start_server('0.0.0.0', (ARGV[1] || 8060), Chat::Protocols::Http chat)
 end
