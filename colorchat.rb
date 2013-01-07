@@ -24,11 +24,12 @@ require 'yaml'
 require 'json'
 require 'time'
 require 'socket'
+require 'fiber'
 require 'digest/md5'
 require 'eventmachine'
 require 'em-redis'
 require 'em-websocket'
-require 'fiber'
+require 'evma_httpserver'
 
 Dir["#{File.dirname(__FILE__)}/chat/*.rb"].each           { |file| require file }
 Dir["#{File.dirname(__FILE__)}/chat/protocols/*.rb"].each { |file| require file }
@@ -54,4 +55,6 @@ EventMachine.run do
       puts "[#{Time.now}][WebSocket] #{Socket.unpack_sockaddr_in(socket.get_peername).join(':')} - Connection error: #{error}"
     end
   end
+
+  EventMachine.start_server('0.0.0.0', (ARGV[1] || 8060), Chat::Protocols::Http)
 end
