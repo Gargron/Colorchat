@@ -4,7 +4,7 @@ gem "json"
 gem "eventmachine"
 gem "em-websocket"
 gem "em-redis"
-gem "evma_httpserver"
+gem "eventmachine_httpserver"
 
 group :test do
   gem "rspec"
