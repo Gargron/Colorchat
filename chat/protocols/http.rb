@@ -14,9 +14,11 @@ module Chat
       end
 
       def process_http_request
-        res = EventMachine::DelegatedHttpResponse.new self
+        res  = EventMachine::DelegatedHttpResponse.new self
+        stop = false
 
         @subscription_id = @chat.root_room.subscribe do |data|
+          stop = true
           res.status  = 200
           res.content = data
           res.send_response
@@ -34,12 +36,15 @@ module Chat
         elsif @http_request_method == 'GET'
           EventMachine::defer do
             60.times do
+              break if stop
               sleep 1
             end
 
-            res.status  = 204
-            res.content = ''
-            res.send_response
+            unless stop
+              res.status  = 204
+              res.content = ''
+              res.send_response
+            end
           end
         end
       end
